@@ -1,17 +1,23 @@
 EECS 595 Class Project
 
 To convert raw data to feature maps, use the following codes:
+
 (1). for binary features:
     from features import features.get_features
-    train_x, train_y, test_x, test_y = \
-      get_features(dataset, 'binary')
+    train_x, train_y, test_x, test_y, _, _, _, _ = \
+        get_features(dataset, 'binary')
 (2). for term frequency: 
     import features
-    train_x, train_y, test_x, test_y = \
-      get_features(dataset, 'frequency')
+    train_x, train_y, test_x, test_y, _, _, _, _ = \
+        get_features(dataset, 'frequency')
 (3). for tf-idf:
     import features
-    train_x, train_y, test_x, test_y = \
-      get_features(dataset, 'tf-idf')
+    train_x, train_y, test_x, test_y, _, _, _, _ = \
+        get_features(dataset, 'tf-idf')
+
 For more information of input and output variable type of 
 features.get_features, please read  the commont in features.py
+Note: 10-20 minutes are required for reading in the entire dataset
+      (120k songs). For debugging, set the 'max_songs' tag to be 
+      a small number such as 3k.
+
