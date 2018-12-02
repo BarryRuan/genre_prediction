@@ -1,1 +1,17 @@
 EECS 595 Class Project
+
+To convert raw data to feature maps, use the following codes:
+(1). for binary features:
+    from features import features.get_features
+    train_x, train_y, test_x, test_y = \
+      get_features(dataset, 'binary')
+(2). for term frequency: 
+    import features
+    train_x, train_y, test_x, test_y = \
+      get_features(dataset, 'frequency')
+(3). for tf-idf:
+    import features
+    train_x, train_y, test_x, test_y = \
+      get_features(dataset, 'tf-idf')
+For more information of input and output variable type of 
+features.get_features, please read  the commont in features.py
