@@ -28,6 +28,7 @@ if __name__ == "__main__":
         exit(1)
 
     ##### Call the classifier #####
+
     if classifier_in == "knn":
         KNN.run(vectorization_in)
     
@@ -39,6 +40,8 @@ if __name__ == "__main__":
 
     elif classifier_in == "svm":
         SVM.run(vectorization_in)
+
+    #TODO: Call more classifiers here
 
 
 
