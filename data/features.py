@@ -9,8 +9,8 @@ class LyricsDataSet:
         self.train_x, self.train_y, self.test_x, self.test_y = \
                 self._get_features(feature_types, max_song)
 
-    def _read_idf():
-        f = open('vocabulary.txt')
+    def _read_idf(self):
+        f = open('data/vocabulary.txt')
         idf = []
         for line in f.readlines():
             idf.append(float(line.split(',')[1]))
@@ -29,7 +29,7 @@ class LyricsDataSet:
         if max_song:
             lines = lines[:max_song]
         if feature_type == 'tf-idf':
-            idf = _read_idf()
+            idf = self._read_idf()
         num_songs = 0
         for line in lines:
             if num_songs != 0 and num_songs % 10000 == 0:
@@ -56,6 +56,7 @@ class LyricsDataSet:
             else:
                 train_x.append(feature_vector)
                 train_y.append(int(genre))
+        f.close()
         return train_x, train_y, test_x, test_y
 
     def get_train_x(self):
