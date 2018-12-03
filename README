@@ -1,23 +1,38 @@
 EECS 595 Class Project
 
-To convert raw data to feature maps, use the following codes:
+To get feature maps, use the following codes:
 
-(1). for binary features:
-    from features import features.get_features
-    train_x, train_y, test_x, test_y, _, _, _, _ = \
-        get_features(dataset, 'binary')
-(2). for term frequency: 
-    import features
-    train_x, train_y, test_x, test_y, _, _, _, _ = \
-        get_features(dataset, 'frequency')
-(3). for tf-idf:
-    import features
-    train_x, train_y, test_x, test_y, _, _, _, _ = \
-        get_features(dataset, 'tf-idf')
+  (1). for binary features:
 
-For more information of input and output variable type of 
-features.get_features, please read  the commont in features.py
-Note: 10-20 minutes are required for reading in the entire dataset
-      (120k songs). For debugging, set the 'max_songs' tag to be 
-      a small number such as 3k.
+      from data.features import LyricsDataSet
+      lyricsData = LyricsDataSet('binary')
 
+  (2). for term frequency: 
+
+      from data.features import LyricsDataSet
+      lyricsData = LyricsDataSet('frequency')
+
+  (3). for tf-idf:
+
+      from data.features import LyricsDataSet
+      lyricsData = LyricsDataSet('tf-idf')
+
+  To get train and test splits, use the following codes:
+
+    train_x = lyricsData.get_train_x()
+    train_y = lyricsData.get_train_y()
+    test_x = lyricsData.get_test_x()
+    test_y = lyricsData.get_test_y()
+
+  Note that train_x and test_x are lists of scipy.sparse_matrix, to 
+  convert it to np.array(), you can use train_x[i].toarray()
+
+------------------
+|db_processing.py|
+------------------
+This file is used to transform the original dataset mxm_dataset.db to
+several .txt files including data/frequency_features.txt, 
+data/vocabulary.txt, data/genreList.txt. The new files are much smaller
+to the original file (<60MB vs. 2.6GB) so that time consumed on reading
+train and test split could be greatly reduced from (10 min to 20s).
+If you downloaded the data/ directory, there is no need to run this code.
