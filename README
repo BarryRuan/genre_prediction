@@ -16,7 +16,7 @@ DEVELOPMENT:
 
 After adding a new classifier, do the following:
 
-(1). Make sure that your classifier code in contained in a function. Update main.py with the new classifier (check for TODO tags in main.py)
+(1). Make sure that your classifier code is contained in a function. Update main.py with the new classifier (check for TODO tags in main.py)
 
 (2). Update the lists defined in runner.sh
 
