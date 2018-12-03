@@ -3,7 +3,7 @@ import scipy
 import time
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.svm import SVC
-from features import get_features
+from data.features import LyricsDataSet
 
 features = LyricsDataSet('binary')
 train_x = features.get_train_x()
@@ -18,7 +18,7 @@ c_values = [.0001, .001, .01, .1, 1]
 for c in c_values:
 	print("C = " + str(c))
 	start_time = time.time()
-	lr = SVC(C=c, kernel='rbf')
+	lr = SVC(C=c, kernel='linear')
 	lr.fit(train_matrix, train_y)
 	end_time = time.time()
 	print("Training time (seconds) : " + str(end_time-start_time))
