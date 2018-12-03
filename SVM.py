@@ -5,8 +5,11 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 from sklearn.svm import SVC
 from features import get_features
 
-DATASET = 'mxm_dataset.db'
-train_x, train_y, test_x, test_y, _, _, _, _ = get_features(DATASET, 'binary', max_songs=120000)
+features = LyricsDataSet('binary')
+train_x = features.get_train_x()
+train_y = features.get_train_y()
+test_x = features.get_test_x()
+test_y = features.get_test_y()
 # stack the list of sparse matrices into one big matrix
 train_matrix = scipy.sparse.vstack(train_x)
 test_matrix = scipy.sparse.vstack(test_x)
