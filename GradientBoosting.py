@@ -3,10 +3,13 @@ import numpy as np
 from sklearn.ensemble import GradientBoostingClassifier
 import sklearn.metrics
 import scipy.sparse
+import sys
+
 # Tune max depth -- decrease == robust?
 # for GBT -> tune max features
 class GradientBoosting:
   def __init__(self, method):
+    print('USING METHOD: {}'.format(method))
     # Read lyrics dataset and get train/test splits
     dl = DataLoader()
     self.train_x, self.train_y, self.test_x, self.test_y = dl.load(method)
@@ -37,5 +40,8 @@ class GradientBoosting:
     print('f1: {}'.format(f))
 
 if __name__ == '__main__':
-  rf = GradientBoosting('binary')
+  method = 'binary'
+  if len(sys.argv) == 2:
+    method = sys.argv[1]
+  rf = GradientBoosting(method)
   rf.run()

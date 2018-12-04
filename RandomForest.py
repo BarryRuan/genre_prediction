@@ -3,10 +3,12 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 import sklearn.metrics
 import scipy.sparse
+import sys
 # Tune max depth -- decrease == robust?
 # for GBT -> tune max features
 class RandomForest:
   def __init__(self, method):
+    print('USING METHOD: {}'.format(method))
     # Read lyrics dataset and get train/test splits
     dl = DataLoader()
     self.train_x, self.train_y, self.test_x, self.test_y = dl.load(method)
@@ -37,7 +39,10 @@ class RandomForest:
     print('f1: {}'.format(f))
 
 if __name__ == '__main__':
-  rf = RandomForest('frequency')
+  method = 'binary'
+  if len(sys.argv) == 2:
+    method = sys.argv[1]
+  rf = RandomForest(method)
   args = {
     'n_estimators': 100
   }
