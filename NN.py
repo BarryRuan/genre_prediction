@@ -21,14 +21,14 @@ def restore(sess, checkpoint_path):
 def NN(input_layer):
     weights = {
             'w1': tf.Variable(\
-                    tf.truncated_normal([5000, 200], stddev=0.03),name='w1'),
+                    tf.truncated_normal([5000, 1000], stddev=0.03),name='w1'),
             'w2': tf.Variable(\
-                    tf.truncated_normal([200, 100], stddev=0.03),name='w2'),
+                    tf.truncated_normal([1000, 100], stddev=0.03),name='w2'),
             'w3': tf.Variable(\
                     tf.truncated_normal([100, 15], stddev=0.03),name='w3')
             }
     biases = {
-            'b1': tf.Variable(tf.truncated_normal([200]),name='b1'),
+            'b1': tf.Variable(tf.truncated_normal([1000]),name='b1'),
             'b2': tf.Variable(tf.truncated_normal([100]),name='b2'),
             'b3': tf.Variable(tf.truncated_normal([15]),name='b3')
             }
@@ -85,8 +85,8 @@ def test(sess, input_layer, pred_labels, lyricsdata):
     preds = np.zeros(1)
     while not lyricsdata.test_done():
         batchx = lyricsdata.get_batch('test')
-        preds = np.concatenate([preds,\
-                sess.run([pred_labels], {input_layer:batchx})])
+        pred = sess.run([pred_labels], {input_layer:batchx})[0]
+        preds = np.concatenate([preds,pred])
     preds = preds[1:]
     return np.sum(preds==test_y)/len(test_y)
 
@@ -96,7 +96,7 @@ def main(feature):
     label_layer = tf.placeholder(tf.float32, shape=(None, 15))
     nn_out = NN(input_layer)
     err = loss(nn_out, label_layer)
-    opti = optimizer(err)
+    opti = optimizer(err, lr=10e-5)
     pred_labels = prediction(nn_out)
     lyricsdata = LyricsDataSet(feature_type=feature)
     acc = accuracy(nn_out, label_layer)

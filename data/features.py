@@ -103,7 +103,7 @@ class LyricsDataSet:
         elif partition == 'test':
             batchX, self.test_count = \
                 self._batch_helper(
-                    self.testX, None, self.test_count, batch_size)
+                    self.test_x, None, self.test_count, batch_size)
             return batchX
 
     def _batch_helper(self, X, y, count, batch_size):
