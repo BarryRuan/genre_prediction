@@ -1,6 +1,7 @@
 # Written by Preet Patel (ppreet), Zhiming Ruan (ruanzhim), Lance Strait (straitl) and Nathan Wernert (wernertn) for EECS 595 Final Project
 
 import sys
+import KNN, LogisticRegression, NaiveBayes, SVM
 
 
 # Globals
@@ -25,6 +26,24 @@ if __name__ == "__main__":
     if classifier_in not in classification_list:
         print("Error: Classification option not valid")
         exit(1)
+
+    ##### Call the classifier #####
+
+    if classifier_in == "knn":
+        KNN.run(vectorization_in)
+    
+    elif classifier_in == "logistic_regression":
+        LogisticRegression.run(vectorization_in)
+
+    elif classifier_in == "naive_bayes":
+        NaiveBayes.run(vectorization_in)
+
+    elif classifier_in == "svm":
+        SVM.run(vectorization_in)
+
+    #TODO: Call more classifiers here
+
+
 
     
 

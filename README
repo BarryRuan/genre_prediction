@@ -1,5 +1,31 @@
 EECS 595 Class Project
 
+-----------------------------------------
+USAGE:
+
+(1). To run a single instance, use
+    "python3 main.py [binary | frequency | tf-idf] [naive_bayes | logistic_regression | knn | svm ]"
+
+(2). To run ALL combinations, execute the runner.sh file
+
+NOTE: Not all combinations work properly. Use the runner.sh file to see which ones.
+
+
+----------------------------------------
+DEVELOPMENT:
+
+After adding a new classifier, do the following:
+
+(1). Make sure that your classifier code is contained in a function. Update main.py with the new classifier (check for TODO tags in main.py)
+
+(2). Update the lists defined in runner.sh
+
+(3). Update the usage part of this README
+
+
+-----------------------------------------
+DEVELOPMENT: 
+
 To get feature maps, use the following codes:
 
   (1). for binary features:
