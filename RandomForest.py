@@ -4,6 +4,8 @@ from sklearn.ensemble import RandomForestClassifier
 import sklearn.metrics
 import scipy.sparse
 import sys
+import os
+
 # Tune max depth -- decrease == robust?
 # for GBT -> tune max features
 class RandomForest:
@@ -29,6 +31,19 @@ class RandomForest:
     f = sklearn.metrics.f1_score(self.test_y, self.predictions, average='weighted')
     return a, p, r, f
 
+  # return the top n most import words(?) in the dataset
+  def importance(self, n=10):
+    indices = np.argsort(self.clf.feature_importances_)
+
+    filepath = os.path.join(os.path.dirname(__file__), 'data/vocabulary.txt')
+    words = []
+    with open(filepath) as file:
+      for line in file:
+        words.append(line.strip().split(',')[0])
+
+    most_important = [ words[indices[i]] for i in list(range(n)) ]
+    return most_important
+
   def run(self, args={}):
     self.train(args)
     self.predict()
@@ -37,6 +52,8 @@ class RandomForest:
     print('precision: {}'.format(p))
     print('recall: {}'.format(r))
     print('f1: {}'.format(f))
+
+    print(self.importance(10))
 
 if __name__ == '__main__':
   method = 'binary'
