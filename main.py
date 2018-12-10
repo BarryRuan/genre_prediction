@@ -63,10 +63,6 @@ if __name__ == "__main__":
         KMeans.run(vectorization_in)
 
 
-    #TODO: Call more classifiers here
-
-
-
     
 
 
