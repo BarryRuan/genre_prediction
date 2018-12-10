@@ -90,7 +90,7 @@ def test(sess, input_layer, pred_labels, lyricsdata):
     preds = preds[1:]
     return np.sum(preds==test_y)/len(test_y)
 
-def main(feature):
+def run(feature):
     print("Building model.")
     input_layer = tf.placeholder(tf.float32, shape=(None, 5000))
     label_layer = tf.placeholder(tf.float32, shape=(None, 15))
@@ -109,6 +109,3 @@ def main(feature):
         print("Accuracy on test set is {}".format(total_acc))
         print('saving trained model...\n')
         saver.save(sess, save_path)
-
-if __name__ == '__main__':
-    main(sys.argv[1])

@@ -4,9 +4,9 @@ EECS 595 Class Project
 USAGE:
 
 (1). To run a single instance, use
-    "python3 main.py [binary | frequency | tf-idf] [naive_bayes | logistic_regression | knn | svm ]"
+    "python3 main.py [binary | frequency | tf-idf] [naive_bayes | logistic_regression | knn | svm | baseline | random_forest | gradient_boosted_tree | neural_network]"
 
-(2). To run ALL combinations, execute the runner.sh file
+(2). OUTDATED: To run ALL combinations, execute the runner.sh file
 
 NOTE: Not all combinations work properly. Use the runner.sh file to see which ones.
 

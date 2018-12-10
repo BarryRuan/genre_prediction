@@ -55,12 +55,3 @@ class RandomForest:
 
     print(self.importance(10))
 
-if __name__ == '__main__':
-  method = 'binary'
-  if len(sys.argv) == 2:
-    method = sys.argv[1]
-  rf = RandomForest(method)
-  args = {
-    'n_estimators': 100
-  }
-  rf.run(args)

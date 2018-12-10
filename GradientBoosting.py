@@ -38,10 +38,4 @@ class GradientBoosting:
     print('precision: {}'.format(p))
     print('recall: {}'.format(r))
     print('f1: {}'.format(f))
-
-if __name__ == '__main__':
-  method = 'binary'
-  if len(sys.argv) == 2:
-    method = sys.argv[1]
-  rf = GradientBoosting(method)
-  rf.run()
+    
