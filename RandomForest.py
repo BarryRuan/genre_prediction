@@ -26,9 +26,9 @@ class RandomForest:
 
   def metrics(self):
     a = sklearn.metrics.accuracy_score(self.test_y, self.predictions)
-    p = sklearn.metrics.precision_score(self.test_y, self.predictions, average='weighted')
-    r = sklearn.metrics.recall_score(self.test_y, self.predictions, average='weighted')
-    f = sklearn.metrics.f1_score(self.test_y, self.predictions, average='weighted')
+    p = sklearn.metrics.precision_score(self.test_y, self.predictions, average='macro')
+    r = sklearn.metrics.recall_score(self.test_y, self.predictions, average='macro')
+    f = sklearn.metrics.f1_score(self.test_y, self.predictions, average='macro')
     return a, p, r, f
 
   # return the top n most import words(?) in the dataset
@@ -53,5 +53,6 @@ class RandomForest:
     print('recall: {}'.format(r))
     print('f1: {}'.format(f))
 
-    print(self.importance(10))
+    # Get the 10 most important splits
+    # print(self.importance(10))
 

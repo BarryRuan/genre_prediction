@@ -13,18 +13,19 @@ if __name__ == "__main__":
     ###### Check and get command line arguments ######
 
     if len(sys.argv) != 3:
-        print("Error: Check command line input")
+        print("Error: Check command line input.")
+        print("Correct format is: python main.py <vectorization_method> <classification_list>.")
         exit(1)
     
     vectorization_in = sys.argv[1]
     classifier_in = sys.argv[2]
 
     if vectorization_in not in vectorization_list:
-        print("Error: Vectorization option not valid")
+        print("Error: Vectorization option not valid. Valid options are {}".format(vectorization_list))
         exit(1)
     
     if classifier_in not in classification_list:
-        print("Error: Classification option not valid")
+        print("Error: Classification option not valid. Valid options are {}".format(classification_list))
         exit(1)
 
     ##### Call the classifier #####
