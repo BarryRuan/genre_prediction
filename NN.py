@@ -67,7 +67,7 @@ def prediction(pred):
 def train(sess, saver, save_path, input_layer, pred_labels,\
         label_layer, err, opti, acc, lyricsdata):
     print("Start training")
-    for batch_i in range(1500):
+    for batch_i in range(900):
         if batch_i % 100 == 0:
             saver.save(sess, save_path)
             print("{} batches trained.".format(batch_i))
