@@ -2,6 +2,7 @@ from sklearn.naive_bayes import MultinomialNB, BernoulliNB
 from data.features import LyricsDataSet
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 import scipy
+import time
 
 def run(vectorization_type):
     
@@ -14,8 +15,11 @@ def run(vectorization_type):
     test_matrix = scipy.sparse.vstack(test_x)
 
     # Naive Bayes algorithm
+    start_time = time.time()
     naive_bayes = MultinomialNB()
     naive_bayes = naive_bayes.fit(train_matrix, train_y)
+    end_time = time.time()
+    print("Training time: " + str(end_time-start_time))
     preds = naive_bayes.predict(test_matrix)
 
     # Print stats

@@ -25,9 +25,9 @@ class GradientBoosting:
 
   def metrics(self):
     a = sklearn.metrics.accuracy_score(self.test_y, self.predictions)
-    p = sklearn.metrics.precision_score(self.test_y, self.predictions, average='weighted')
-    r = sklearn.metrics.recall_score(self.test_y, self.predictions, average='weighted')
-    f = sklearn.metrics.f1_score(self.test_y, self.predictions, average='weighted')
+    p = sklearn.metrics.precision_score(self.test_y, self.predictions, average='macro')
+    r = sklearn.metrics.recall_score(self.test_y, self.predictions, average='macro')
+    f = sklearn.metrics.f1_score(self.test_y, self.predictions, average='macro')
     return a, p, r, f
 
   def run(self, args={}):
@@ -38,10 +38,4 @@ class GradientBoosting:
     print('precision: {}'.format(p))
     print('recall: {}'.format(r))
     print('f1: {}'.format(f))
-
-if __name__ == '__main__':
-  method = 'binary'
-  if len(sys.argv) == 2:
-    method = sys.argv[1]
-  rf = GradientBoosting(method)
-  rf.run()
+    

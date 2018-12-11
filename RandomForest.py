@@ -4,6 +4,8 @@ from sklearn.ensemble import RandomForestClassifier
 import sklearn.metrics
 import scipy.sparse
 import sys
+import os
+
 # Tune max depth -- decrease == robust?
 # for GBT -> tune max features
 class RandomForest:
@@ -24,10 +26,23 @@ class RandomForest:
 
   def metrics(self):
     a = sklearn.metrics.accuracy_score(self.test_y, self.predictions)
-    p = sklearn.metrics.precision_score(self.test_y, self.predictions, average='weighted')
-    r = sklearn.metrics.recall_score(self.test_y, self.predictions, average='weighted')
-    f = sklearn.metrics.f1_score(self.test_y, self.predictions, average='weighted')
+    p = sklearn.metrics.precision_score(self.test_y, self.predictions, average='macro')
+    r = sklearn.metrics.recall_score(self.test_y, self.predictions, average='macro')
+    f = sklearn.metrics.f1_score(self.test_y, self.predictions, average='macro')
     return a, p, r, f
+
+  # return the top n most import words(?) in the dataset
+  def importance(self, n=10):
+    indices = np.argsort(self.clf.feature_importances_)
+
+    filepath = os.path.join(os.path.dirname(__file__), 'data/vocabulary.txt')
+    words = []
+    with open(filepath) as file:
+      for line in file:
+        words.append(line.strip().split(',')[0])
+
+    most_important = [ words[indices[i]] for i in list(range(n)) ]
+    return most_important
 
   def run(self, args={}):
     self.train(args)
@@ -38,12 +53,6 @@ class RandomForest:
     print('recall: {}'.format(r))
     print('f1: {}'.format(f))
 
-if __name__ == '__main__':
-  method = 'binary'
-  if len(sys.argv) == 2:
-    method = sys.argv[1]
-  rf = RandomForest(method)
-  args = {
-    'n_estimators': 100
-  }
-  rf.run(args)
+    # Get the 10 most important splits
+    # print(self.importance(10))
+
