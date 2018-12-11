@@ -4,32 +4,18 @@ from data.features import LyricsDataSet
 import os
 import sys
 
-def restore(sess, checkpoint_path):
-    saver = tf.train.Saver()
-    checkpoint = tf.train.get_checkpoint_state(checkpoint_path)
-    if checkpoint:
-        path = checkpoint.model_checkpoint_path
-        print('Restoring model parameters from {}'.format(path))
-        saver.restore(sess, path)
-    else:
-        print('No saved model parameters found')
-    # Return checkpoint path for call to saver.save()
-    save_path = os.path.join(
-        checkpoint_path, os.path.basename(os.path.dirname(checkpoint_path)))
-    return saver, save_path
-
 def NN(input_layer):
     weights = {
             'w1': tf.Variable(\
                     tf.truncated_normal([5000, 1000], stddev=0.03),name='w1'),
             'w2': tf.Variable(\
-                    tf.truncated_normal([1000, 100], stddev=0.03),name='w2'),
+                    tf.truncated_normal([1000, 200], stddev=0.03),name='w2'),
             'w3': tf.Variable(\
-                    tf.truncated_normal([100, 15], stddev=0.03),name='w3')
+                    tf.truncated_normal([200, 15], stddev=0.03),name='w3')
             }
     biases = {
             'b1': tf.Variable(tf.truncated_normal([1000]),name='b1'),
-            'b2': tf.Variable(tf.truncated_normal([100]),name='b2'),
+            'b2': tf.Variable(tf.truncated_normal([200]),name='b2'),
             'b3': tf.Variable(tf.truncated_normal([15]),name='b3')
             }
 
@@ -64,17 +50,15 @@ def prediction(pred):
     pred = tf.argmax(pred,axis=1)
     return pred
 
-def train(sess, saver, save_path, input_layer, pred_labels,\
+def train(sess, input_layer, pred_labels,\
         label_layer, err, opti, acc, lyricsdata):
     print("Start training")
     for batch_i in range(900):
         if batch_i % 100 == 0:
-            saver.save(sess, save_path)
             print("{} batches trained.".format(batch_i))
             batch_x, batch_y = lyricsdata.get_batch('dev',batch_size=1024)
             preds, dev_acc, dev_loss = sess.run([pred_labels, acc, err],\
                     feed_dict={input_layer:batch_x, label_layer:batch_y})
-            print(preds)
             print("Accuracy is {}.\n Loss is {}.".format(dev_acc, dev_loss))
         batch_x, batch_y = lyricsdata.get_batch('train',batch_size=248)
         sess.run(opti, feed_dict={input_layer:batch_x, label_layer:batch_y})
@@ -102,10 +86,7 @@ def run(feature):
     acc = accuracy(nn_out, label_layer)
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
-        saver, save_path = restore(sess, 'nn_checkpoints/{}'.format(feature))
-        train(sess, saver, save_path, input_layer, pred_labels,\
+        train(sess, input_layer, pred_labels,\
             label_layer, err, opti, acc, lyricsdata)
         total_acc = test(sess, input_layer, pred_labels, lyricsdata)
         print("Accuracy on test set is {}".format(total_acc))
-        print('saving trained model...\n')
-        saver.save(sess, save_path)
