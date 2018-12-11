@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) != 3:
         print("Error: Check command line input.")
-        print("Correct format is: python main.py <vectorization_method> <classification_list>.")
+        print("Correct format is: python main.py <vectorization_method> <classification_method>")
         exit(1)
     
     vectorization_in = sys.argv[1]

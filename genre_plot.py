@@ -8,8 +8,7 @@ if __name__ == '__main__':
   train_x, train_y, test_x, test_y = dl.load('binary')
 
   genres = np.concatenate((train_y, test_y))
-  print(type(genres))
-  print(genres.shape)
+  print(len(genres))
 
   # read genrenames
   names = []
@@ -24,6 +23,13 @@ if __name__ == '__main__':
   for i in range(len(names)):
     c = len(list(filter (lambda x: x == names[i], genres)))
     counts.append(c)
-
-  plt.bar(names, counts)
+  
+  plt.rc('axes', axisbelow=True)
+  plt.grid(b=True, axis='x', color='#eeeeee', zorder=-1)
+  plt.ylabel('Genre', labelpad=15, fontsize=18, color='#555555')
+  plt.xlabel('Number of songs', labelpad=15, fontsize=18, color='#555555')
+  plt.title('Genre Distribution', pad=15, fontsize=20, color='#555555')
+  plt.xticks(fontsize=14, color='#555555')
+  plt.yticks(fontsize=14, color='#555555')
+  plt.barh(names, counts)
   plt.show()
