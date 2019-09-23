@@ -4,8 +4,10 @@ EECS 595 Class Project
 USAGE:
 
 Use
-    "
-```python3 main.py [binary | frequency | tf-idf] [naive_bayes | logistic_regression | knn | svm | baseline | random_forest | gradient_boosted_tree | neural_network | k_means]```
+
+```ruby
+python3 main.py [binary | frequency | tf-idf] [naive_bayes | logistic_regression | knn | svm | baseline | random_forest | gradient_boosted_tree | neural_network | k_means]
+```
 
 
 -----------------------------------------
@@ -15,25 +17,33 @@ To get feature maps, use the following codes:
 
   (1). for binary features:
 
-      ```from data.features import LyricsDataSet
-      lyricsData = LyricsDataSet('binary')```
+      ```ruby
+      from data.features import LyricsDataSet
+      lyricsData = LyricsDataSet('binary')
+      ```
 
   (2). for term frequency: 
 
-      ```from data.features import LyricsDataSet
-      lyricsData = LyricsDataSet('frequency')```
+      ```ruby
+      from data.features import LyricsDataSet
+      lyricsData = LyricsDataSet('frequency')
+      ```
 
   (3). for tf-idf:
 
-      ```from data.features import LyricsDataSet
-      lyricsData = LyricsDataSet('tf-idf')```
+      ```ruby
+      from data.features import LyricsDataSet
+      lyricsData = LyricsDataSet('tf-idf')
+      ```
 
   To get train and test splits, use the following codes:
 
-    ```train_x = lyricsData.get_train_x()
+    ```ruby
+    train_x = lyricsData.get_train_x()
     train_y = lyricsData.get_train_y()
     test_x = lyricsData.get_test_x()
-    test_y = lyricsData.get_test_y()```
+    test_y = lyricsData.get_test_y()
+    ```
 
   Note that train_x and test_x are lists of scipy.sparse_matrix, to 
   convert it to np.array(), you can use ```train_x[i].toarray()```
