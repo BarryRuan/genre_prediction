@@ -1,11 +1,11 @@
-EECS 595 Class Project
+#Grene Prediction
 
 -----------------------------------------
-USAGE:
+##USAGE:
 
-Use
+To run the prediction pipeline with specific feature representation and method
 
-```ruby
+```
 python3 main.py [binary | frequency | tf-idf] [naive_bayes | logistic_regression | knn | svm | baseline | random_forest | gradient_boosted_tree | neural_network | k_means]
 ```
 
