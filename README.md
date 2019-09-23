@@ -47,7 +47,7 @@ To get feature maps, use the following codes:
   Note that train_x and test_x are lists of scipy.sparse_matrix, to 
   convert it to np.array(), you can use ```train_x[i].toarray()```
 
-## db_processing.py|
+## db_processing.py
 
 This file is used to transform the original dataset mxm_dataset.db to
 several .txt files including data/frequency_features.txt, 
